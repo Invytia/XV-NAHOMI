@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis XV Años - Nahomi Irais</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- Se actualizaron las fuentes para un estilo más refinado y elegante -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -12,17 +13,17 @@
             /* Paleta: Pastel plateado y azul cielo */
             --azul-cielo: #AEE2FF;
             --azul-claro: #E6F4F1;
-            --azul-oscuro: #2C5282; /* Para textos legibles y contrastes */
+            --azul-oscuro: #2C5282; 
             --plateado: #C0C0C0;
             --plateado-claro: #F5F5F5;
             --plateado-oscuro: #8A9AAB;
             
             --texto-principal: #2D3748;
             --texto-secundario: #4A5568;
-            --fondo-cajas: rgba(255, 255, 255, 0.75);
             
-            --fuente-titulos: 'Playfair Display', serif;
-            --fuente-texto: 'Montserrat', sans-serif;
+            /* Fuentes actualizadas */
+            --fuente-titulos: 'Cormorant Garamond', serif;
+            --fuente-texto: 'Jost', sans-serif;
             --fuente-nombres: 'Great Vibes', cursive;
         }
 
@@ -31,12 +32,40 @@
         body {
             font-family: var(--fuente-texto);
             color: var(--texto-principal);
-            /* Fondo Degradado Pastel */
-            background: linear-gradient(135deg, var(--azul-claro), var(--azul-cielo), var(--plateado-claro), var(--azul-cielo), var(--azul-claro));
+            background: linear-gradient(135deg, #e0f2fe, #f1f5f9, #bae6fd, #f8fafc);
             background-size: 400% 400%;
             animation: gradientPastel 15s ease infinite;
             overflow-x: hidden;
             line-height: 1.6;
+            position: relative;
+        }
+
+        /* Orbes de luz de fondo para mayor efecto visual */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -2;
+            animation: floatOrbs 10s ease-in-out infinite alternate;
+        }
+        body::before {
+            top: 10%;
+            left: -10%;
+            background: rgba(174, 226, 255, 0.6);
+        }
+        body::after {
+            bottom: 10%;
+            right: -10%;
+            background: rgba(192, 192, 192, 0.5);
+            animation-delay: -5s;
+        }
+
+        @keyframes floatOrbs {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.2); }
         }
 
         @keyframes gradientPastel {
@@ -45,45 +74,49 @@
             100% { background-position: 0% 50%; }
         }
 
-        #particles-js { position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; }
+        #particles-js, #sparkles-container { 
+            position: fixed; width: 100vw; height: 100vh; top: 0; left: 0; z-index: -1; pointer-events: none; 
+        }
 
-        /* --- SOBRE ELEGANTE --- */
-        #envelope-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
+        /* --- SOBRE (Diseño translúcido moderno) --- */
+        #envelope-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(255,255,255,0.8); backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
         
-        .envelope-wrapper { position: relative; width: 340px; height: 230px; cursor: pointer; animation: float 3s ease-in-out infinite; perspective: 1000px; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        .envelope-wrapper { position: relative; width: 340px; height: 230px; cursor: pointer; animation: float 4s ease-in-out infinite; perspective: 1000px; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
         
-        .envelope-body { position: absolute; bottom: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #ffffff, var(--azul-cielo)); border-radius: 12px; z-index: 2; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); border: 1px solid rgba(192, 192, 192, 0.5); }
-        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 130px; background: linear-gradient(to bottom, var(--azul-claro), var(--plateado)); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1); z-index: 4; }
-        .envelope-letter { position: absolute; bottom: 15px; left: 15px; width: 310px; height: 200px; background: #ffffff; border-radius: 8px; display: flex; justify-content: center; align-items: center; z-index: 1; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s; border: 1px solid var(--plateado-claro); box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
-        .envelope-letter h2 { font-family: var(--fuente-nombres); font-size: 3.2rem; color: var(--azul-oscuro); text-align: center; font-weight: normal; }
+        /* Efecto translúcido en el sobre */
+        .envelope-body { position: absolute; bottom: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.35); backdrop-filter: blur(12px); border-radius: 12px; z-index: 2; box-shadow: 0 20px 50px rgba(44, 82, 130, 0.15); border: 1px solid rgba(255, 255, 255, 0.8); border-bottom: 1px solid rgba(255,255,255,0.3); border-right: 1px solid rgba(255,255,255,0.3); }
+        .envelope-flap { position: absolute; top: 0; left: 0; width: 100%; height: 130px; background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(174, 226, 255, 0.4)); backdrop-filter: blur(8px); clip-path: polygon(0 0, 50% 100%, 100% 0); transform-origin: top; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 4; border-top: 1px solid rgba(255,255,255,0.9); }
+        .envelope-letter { position: absolute; bottom: 15px; left: 15px; width: 310px; height: 200px; background: #ffffff; border-radius: 8px; display: flex; justify-content: center; align-items: center; z-index: 1; transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.4s; border: 1px solid var(--plateado-claro); box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+        .envelope-letter h2 { font-family: var(--fuente-nombres); font-size: 3.5rem; color: var(--azul-oscuro); text-align: center; font-weight: normal; text-shadow: 0 2px 4px rgba(44, 82, 130, 0.1); }
         
-        .wax-seal { position: absolute; top: 110px; left: 50%; transform: translateX(-50%); width: 65px; height: 65px; background: radial-gradient(circle, #ffffff 0%, var(--plateado) 100%); border-radius: 50%; z-index: 5; display: flex; justify-content: center; align-items: center; font-family: var(--fuente-titulos); color: var(--azul-oscuro); font-size: 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.15); transition: opacity 0.4s ease; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); border: 2px solid #fff; }
+        .wax-seal { position: absolute; top: 105px; left: 50%; transform: translateX(-50%); width: 70px; height: 70px; background: linear-gradient(135deg, #f8f9fa, #e2e8f0, #cbd5e1); border-radius: 50%; z-index: 5; display: flex; justify-content: center; align-items: center; font-family: var(--fuente-titulos); color: var(--azul-oscuro); font-size: 2.2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.9); transition: opacity 0.5s ease; border: 2px solid #fff; }
         .open-envelope .wax-seal { opacity: 0; transition-delay: 0s; }
         .open-envelope .envelope-flap { transform: rotateX(180deg); z-index: 0; }
-        .open-envelope .envelope-letter { transform: translateY(-150px); z-index: 3; }
+        .open-envelope .envelope-letter { transform: translateY(-160px); z-index: 3; }
 
         /* --- CONTENIDO PRINCIPAL --- */
         #main-content { display: none; opacity: 0; transition: opacity 2s ease-in; position: relative; z-index: 10; padding-bottom: 50px; }
         section { padding: 80px 20px; text-align: center; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
         
-        .content-box { background: var(--fondo-cajas); padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.8); width: 100%; backdrop-filter: blur(10px); }
+        /* Cajas estilo cristal */
+        .content-box { background: rgba(255, 255, 255, 0.45); padding: 45px 30px; border-radius: 24px; box-shadow: 0 15px 35px rgba(44, 82, 130, 0.08); border: 1px solid rgba(255,255,255,0.7); border-bottom: 1px solid rgba(255,255,255,0.3); border-right: 1px solid rgba(255,255,255,0.3); width: 100%; backdrop-filter: blur(16px); }
 
-        h1 { font-family: var(--fuente-nombres); font-size: 5rem; color: var(--azul-oscuro); font-weight: normal; line-height: 1; margin: 20px 0; text-shadow: 0 2px 5px rgba(255,255,255,0.8); }
-        h2 { font-family: var(--fuente-titulos); font-size: 2.5rem; margin-bottom: 20px; font-style: italic; color: var(--azul-oscuro); font-weight: 600; }
-        h3 { font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--texto-principal); font-weight: 600; margin-bottom: 10px; }
-        .nombres-papas { font-family: var(--fuente-texto); font-size: 1.1rem; color: var(--texto-secundario); font-weight: 500; margin-bottom: 5px;}
+        h1 { font-family: var(--fuente-nombres); font-size: 5.5rem; color: var(--azul-oscuro); font-weight: normal; line-height: 1.1; margin: 25px 0; text-shadow: 0 4px 15px rgba(255,255,255,1); }
+        h2 { font-family: var(--fuente-titulos); font-size: 2.8rem; margin-bottom: 20px; font-style: italic; color: var(--azul-oscuro); font-weight: 600; text-shadow: 0 2px 10px rgba(255,255,255,0.8); }
+        h3 { font-family: var(--fuente-titulos); font-size: 1.6rem; color: var(--texto-principal); font-weight: 600; margin-bottom: 10px; }
+        .nombres-papas { font-family: var(--fuente-texto); font-size: 1.2rem; color: var(--texto-secundario); font-weight: 400; margin-bottom: 5px; letter-spacing: 1px;}
 
         /* --- IMÁGENES --- */
         .hero-image-wrapper {
-            width: 280px;
-            height: 280px;
+            width: 290px;
+            height: 290px;
             border-radius: 50%;
-            padding: 5px;
-            background: linear-gradient(45deg, var(--azul-oscuro), var(--plateado), var(--azul-cielo));
+            padding: 6px;
+            background: linear-gradient(45deg, var(--azul-oscuro), var(--plateado-claro), var(--azul-cielo), var(--plateado));
             margin: 0 auto 30px auto;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-            animation: rotateBorder 10s linear infinite;
+            box-shadow: 0 20px 50px rgba(44, 82, 130, 0.2);
+            animation: rotateBorder 8s linear infinite;
         }
         @keyframes rotateBorder { 100% { filter: hue-rotate(360deg); } }
         .hero-image {
@@ -96,73 +129,92 @@
 
         .photo-frame {
             width: 100%;
-            max-width: 350px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            margin: 30px auto;
-            border: 5px solid #ffffff;
+            max-width: 360px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(44, 82, 130, 0.15);
+            margin: 35px auto;
+            border: 6px solid #ffffff;
             object-fit: cover;
             transform: rotate(-2deg);
-            transition: transform 0.4s;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
+        .photo-frame:hover { transform: rotate(0deg) scale(1.03); box-shadow: 0 25px 50px rgba(44, 82, 130, 0.25); }
         .photo-frame.right-tilt { transform: rotate(2deg); }
 
-        .editorial-text { font-size: 1rem; letter-spacing: 4px; color: var(--azul-oscuro); text-transform: uppercase; font-weight: 600; }
-        .date-text { font-size: 1.2rem; letter-spacing: 3px; font-weight: 600; color: var(--texto-principal); margin-top: 15px; font-family: var(--fuente-titulos); }
+        .editorial-text { font-size: 1rem; letter-spacing: 5px; color: var(--azul-oscuro); text-transform: uppercase; font-weight: 500; }
+        .date-text { font-size: 1.3rem; letter-spacing: 4px; font-weight: 500; color: var(--texto-principal); margin-top: 15px; font-family: var(--fuente-titulos); }
 
-        /* --- CONTADOR EDITORIAL --- */
-        .timer-container { display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap; }
-        .time-box { text-align: center; background: rgba(255,255,255,0.6); padding: 15px; border-radius: 15px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .time-box span { display: block; font-family: var(--fuente-titulos); font-size: 2.8rem; color: var(--azul-oscuro); line-height: 1; font-weight: 600; }
-        .time-box p { font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: var(--texto-secundario); margin-top: 8px; font-weight: 600; }
+        /* --- CONTADOR (Forzado en un solo renglón) --- */
+        .timer-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            margin-top: 25px; 
+            flex-wrap: nowrap; /* Mantiene todo en una línea */
+            width: 100%;
+        }
+        .time-box { 
+            flex: 1;
+            text-align: center; 
+            background: rgba(255,255,255,0.5); 
+            backdrop-filter: blur(8px);
+            padding: 15px 5px; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 20px rgba(44, 82, 130, 0.06); 
+            border: 1px solid rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.4);
+        }
+        .time-box span { display: block; font-family: var(--fuente-titulos); font-size: 2.2rem; color: var(--azul-oscuro); line-height: 1; font-weight: 600; text-shadow: 0 2px 5px rgba(255,255,255,0.8); }
+        .time-box p { font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--texto-secundario); margin-top: 8px; font-weight: 500; }
 
         /* --- SEPARADOR ELEGANTE --- */
-        .divider { width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--plateado-oscuro), transparent); margin: 30px auto; }
+        .divider { width: 100px; height: 1px; background: linear-gradient(90deg, transparent, var(--azul-oscuro), transparent); margin: 35px auto; opacity: 0.5; }
 
         /* --- MAPAS --- */
-        .map-container { width: 100%; margin-top: 20px; margin-bottom: 25px; }
-        .map-container iframe { border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; border: 3px solid #fff; }
+        .map-container { width: 100%; margin-top: 25px; margin-bottom: 30px; }
+        .map-container iframe { border-radius: 20px; box-shadow: 0 15px 35px rgba(44, 82, 130, 0.1); width: 100%; border: 4px solid #fff; }
 
         /* --- FORMULARIOS --- */
         input, select, textarea {
-            width: 100%; max-width: 400px; padding: 15px 0; margin-bottom: 25px;
-            border: none; border-bottom: 2px solid var(--plateado-oscuro);
-            background: transparent; font-family: var(--fuente-texto); font-size: 1rem;
-            color: var(--texto-principal); outline: none; transition: border-color 0.3s;
+            width: 100%; max-width: 420px; padding: 18px 0; margin-bottom: 25px;
+            border: none; border-bottom: 1px solid rgba(44, 82, 130, 0.3);
+            background: transparent; font-family: var(--fuente-texto); font-size: 1.1rem;
+            color: var(--texto-principal); outline: none; transition: border-color 0.3s, background 0.3s;
             text-align: center;
         }
-        input::placeholder, textarea::placeholder { color: rgba(45, 55, 72, 0.5); }
-        input:focus, select:focus, textarea:focus { border-bottom: 2px solid var(--azul-oscuro); }
-        select { color: var(--texto-principal); background-color: rgba(255,255,255,0.9); }
+        input::placeholder, textarea::placeholder { color: rgba(74, 85, 104, 0.5); font-weight: 300; }
+        input:focus, select:focus, textarea:focus { border-bottom: 1px solid var(--azul-oscuro); background: rgba(255,255,255,0.2); border-radius: 8px 8px 0 0; }
+        select { color: var(--texto-principal); }
+        select option { background-color: #fff; }
         textarea { resize: none; text-align: center; }
 
         .btn {
-            display: inline-block; padding: 16px 45px;
-            background: #ffffff; color: var(--azul-oscuro); text-decoration: none;
-            border-radius: 50px; font-weight: 600; font-size: 1rem; letter-spacing: 1px;
-            border: 2px solid var(--azul-oscuro); cursor: pointer; transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: inline-block; padding: 16px 50px;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px);
+            color: var(--azul-oscuro); text-decoration: none;
+            border-radius: 50px; font-weight: 500; font-size: 1.05rem; letter-spacing: 2px;
+            border: 1px solid rgba(44, 82, 130, 0.5); cursor: pointer; transition: all 0.4s ease; 
+            box-shadow: 0 8px 20px rgba(44, 82, 130, 0.1);
         }
-        .btn:hover { background: var(--azul-oscuro); color: #ffffff; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(44, 82, 130, 0.3); }
+        .btn:hover { background: var(--azul-oscuro); color: #ffffff; transform: translateY(-3px); box-shadow: 0 12px 25px rgba(44, 82, 130, 0.3); border-color: var(--azul-oscuro); }
         .btn-whatsapp { background: #25D366; border-color: #25D366; color: white; margin-top: 15px; }
         .btn-whatsapp:hover { background: #128C7E; border-color: #128C7E; color: white; }
 
         /* --- BOTÓN DE MÚSICA STICKY --- */
         .music-btn {
-            position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px;
-            border-radius: 50%; background: #ffffff;
-            border: 2px solid var(--azul-oscuro);
-            color: var(--azul-oscuro); font-size: 1.2rem; cursor: pointer; z-index: 10001;
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            color: var(--azul-oscuro); font-size: 1.4rem; cursor: pointer; z-index: 10001;
             display: none; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(44, 82, 130, 0.15); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .music-btn:hover { transform: scale(1.1); background: var(--azul-oscuro); color: #ffffff; }
+        .music-btn:hover { transform: scale(1.1) rotate(10deg); background: var(--azul-oscuro); color: #ffffff; }
 
         /* --- ANIMACIONES DE ENTRADA GENERALES --- */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .reveal.active > * { animation: fadeUpStagger 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
+        .reveal.active > * { animation: fadeUpStagger 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; }
         .reveal.active > *:nth-child(1) { animation-delay: 0.1s; }
         .reveal.active > *:nth-child(2) { animation-delay: 0.2s; }
         .reveal.active > *:nth-child(3) { animation-delay: 0.3s; }
@@ -170,22 +222,25 @@
         .reveal.active > *:nth-child(5) { animation-delay: 0.5s; }
 
         @keyframes fadeUpStagger {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% { opacity: 0; transform: translateY(25px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
         /* Footer */
         .watermark {
             text-align: center; padding: 40px 20px; font-family: var(--fuente-texto); 
-            font-size: 0.8rem; color: var(--plateado-oscuro); letter-spacing: 3px; 
-            text-transform: uppercase; margin-top: 40px;
+            font-size: 0.85rem; color: var(--plateado-oscuro); letter-spacing: 4px; 
+            text-transform: uppercase; margin-top: 40px; font-weight: 500;
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 3.8rem; }
+            h1 { font-size: 4rem; }
+            h2 { font-size: 2.2rem; }
             section { padding: 60px 15px; }
-            .content-box { padding: 30px 15px; }
+            .content-box { padding: 35px 20px; }
             .map-container iframe { height: 350px; }
+            .time-box span { font-size: 1.6rem; }
+            .time-box p { font-size: 0.65rem; }
         }
     </style>
 </head>
@@ -199,7 +254,7 @@
         <i class="fa-solid fa-pause"></i>
     </button>
 
-    <!-- PANTALLA DE SOBRE -->
+    <!-- PANTALLA DE SOBRE TRANSLÚCIDO -->
     <div id="envelope-screen">
         <div class="envelope-wrapper" id="envelope">
             <div class="envelope-letter"><h2>Nahomi</h2></div>
@@ -207,11 +262,19 @@
             <div class="envelope-body"></div>
             <div class="wax-seal">N</div>
         </div>
-        <div class="editorial-text" style="margin-top: 60px; font-size: 0.8rem; color: var(--plateado-oscuro);">Toca para abrir</div>
+        <div class="editorial-text" style="margin-top: 70px; font-size: 0.85rem; color: var(--azul-oscuro); animation: pulse 2s infinite;">Toca para abrir</div>
     </div>
+    
+    <style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
 
-    <!-- PARTÍCULAS (Destellos claros, plata y azul cielo) -->
+    <!-- PARTÍCULAS Y BRILLOS -->
     <div id="particles-js"></div>
+    <div id="sparkles-container"></div>
 
     <div id="main-content">
         
@@ -226,11 +289,11 @@
             <div class="date-text">08 DE AGOSTO DE 2026</div>
         </section>
 
-        <!-- MENSAJE ESPECIAL -->
+        <!-- MENSAJE ESPECIAL Y CONTADOR (En un solo renglón) -->
         <section class="reveal">
             <div class="content-box">
-                <i class="fa-solid fa-quote-left" style="font-size: 2rem; color: var(--plateado-oscuro); margin-bottom: 15px; display: block;"></i>
-                <p style="font-family: var(--fuente-titulos); font-size: 1.6rem; font-style: italic; color: var(--texto-secundario); line-height: 1.5;">
+                <i class="fa-solid fa-quote-left" style="font-size: 2.5rem; color: rgba(44, 82, 130, 0.3); margin-bottom: 20px; display: block;"></i>
+                <p style="font-family: var(--fuente-titulos); font-size: 1.8rem; font-style: italic; color: var(--texto-secundario); line-height: 1.4;">
                     "Hay momentos que se atesoran en el corazón para siempre, por esa razón quiero que compartas conmigo este día tan especial"
                 </p>
                 <div class="divider"></div>
@@ -245,12 +308,12 @@
 
         <!-- PADRES Y PADRINOS -->
         <section class="reveal">
-            <h2 style="font-size: 2rem;">Con la bendición de Dios...</h2>
-            <p style="margin-bottom: 20px; color: var(--texto-secundario); font-weight: 500;">Y de mis padres</p>
+            <h2 style="font-size: 2.2rem;">Con la bendición de Dios...</h2>
+            <p style="margin-bottom: 15px; color: var(--azul-oscuro); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Y de mis padres</p>
             <p class="nombres-papas">Patricia Guadalupe Chavarin Jimenez</p>
-            <p class="nombres-papas" style="margin-bottom: 30px;">Luis Enrique Joya Rodriguez</p>
+            <p class="nombres-papas" style="margin-bottom: 35px;">Luis Enrique Joya Rodriguez</p>
             
-            <p style="margin-bottom: 20px; color: var(--texto-secundario); font-weight: 500;">Mis padrinos</p>
+            <p style="margin-bottom: 15px; color: var(--azul-oscuro); font-weight: 500; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">Mis padrinos</p>
             <p class="nombres-papas">Jose Alejandro Amezcua Palafox</p>
             <p class="nombres-papas">Maria Isabel Aguas Muñoz</p>
             
@@ -261,9 +324,9 @@
         <section class="reveal">
             <div class="content-box">
                 <h2>Ceremonia Religiosa</h2>
-                <i class="fa-solid fa-church" style="font-size: 2.5rem; color: var(--azul-oscuro); margin-bottom: 15px;"></i>
+                <i class="fa-solid fa-church" style="font-size: 2.8rem; color: var(--azul-oscuro); margin-bottom: 20px; text-shadow: 0 4px 10px rgba(44, 82, 130, 0.2);"></i>
                 <h3>Parroquia del Sagrado Corazón de Jesús</h3>
-                <p style="font-size: 1.2rem; font-weight: 600; color: var(--texto-principal); margin: 10px 0;">5:00 P.M.</p>
+                <p style="font-size: 1.3rem; font-weight: 500; color: var(--texto-principal); margin: 15px 0;">5:00 P.M.</p>
                 
                 <div class="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.8580468368878!2d-105.20632409999999!3d20.7159882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842148bd2083770f%3A0x5038c27e2c1d919f!2sParroquia%20del%20Sagrado%20Coraz%C3%B3n%20de%20Jes%C3%BAs%20Ixtapa!5e0!3m2!1ses-419!2smx!4v1784179453198!5m2!1ses-419!2smx" width="600" height="350" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -278,9 +341,9 @@
         <section class="reveal">
             <div class="content-box">
                 <h2>Recepción</h2>
-                <i class="fa-solid fa-champagne-glasses" style="font-size: 2.5rem; color: var(--azul-oscuro); margin-bottom: 15px;"></i>
+                <i class="fa-solid fa-champagne-glasses" style="font-size: 2.8rem; color: var(--azul-oscuro); margin-bottom: 20px; text-shadow: 0 4px 10px rgba(44, 82, 130, 0.2);"></i>
                 <h3>Canchas "La Vía"</h3>
-                <p style="font-size: 1.2rem; font-weight: 600; color: var(--texto-principal); margin: 10px 0;">7:00 P.M.</p>
+                <p style="font-size: 1.3rem; font-weight: 500; color: var(--texto-principal); margin: 15px 0;">7:00 P.M.</p>
                 
                 <div class="map-container">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3731.9677292888086!2d-105.2268553!3d20.711534999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842147221d02bbf9%3A0xe51fb34b79aebc38!2sCanchas%20%22La%20Via%22!5e0!3m2!1ses-419!2smx!4v1784179482337!5m2!1ses-419!2smx" width="600" height="350" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
@@ -293,21 +356,21 @@
 
         <!-- DRESS CODE -->
         <section class="reveal">
-            <i class="fa-solid fa-shirt" style="font-size: 2.5rem; color: var(--azul-oscuro); margin-bottom: 20px;"></i>
+            <i class="fa-solid fa-shirt" style="font-size: 2.8rem; color: var(--azul-oscuro); margin-bottom: 25px; text-shadow: 0 4px 10px rgba(255,255,255,0.8);"></i>
             <h2>Código de Vestimenta</h2>
-            <h3 style="font-family: var(--fuente-texto); font-weight: 600; font-size: 1.5rem; letter-spacing: 3px; color: var(--texto-principal);">FORMAL</h3>
-            <p style="margin-top: 15px; color: var(--texto-secundario); font-weight: 500; font-style: italic; max-width: 500px;">
-                El color reservado exclusivamente para la quinceañera es <br><strong>Cualquier gama del azul</strong>.
+            <h3 style="font-family: var(--fuente-texto); font-weight: 500; font-size: 1.4rem; letter-spacing: 4px; color: var(--texto-principal);">FORMAL</h3>
+            <p style="margin-top: 15px; color: var(--texto-secundario); font-weight: 400; font-style: italic; max-width: 500px; font-family: var(--fuente-titulos); font-size: 1.3rem;">
+                El color reservado exclusivamente para la quinceañera es <br><strong style="font-family: var(--fuente-texto); font-size: 1.1rem; color: var(--azul-oscuro); font-style: normal; margin-top: 10px; display: block;">Cualquier gama del azul</strong>
             </p>
         </section>
         
         <!-- MESA DE REGALOS -->
         <section class="reveal">
             <div class="content-box">
-                <i class="fa-solid fa-envelope-open-text" style="font-size: 2.5rem; color: var(--azul-oscuro); margin-bottom: 20px;"></i>
+                <i class="fa-solid fa-envelope-open-text" style="font-size: 2.8rem; color: var(--azul-oscuro); margin-bottom: 25px; text-shadow: 0 4px 10px rgba(44, 82, 130, 0.2);"></i>
                 <h2>Mesa de Regalos</h2>
-                <h3 style="margin-bottom: 15px; color: var(--texto-principal);">Lluvia de Sobres</h3>
-                <p style="max-width: 500px; color: var(--texto-secundario); margin: 0 auto;">
+                <h3 style="margin-bottom: 20px; color: var(--texto-principal);">Lluvia de Sobres</h3>
+                <p style="max-width: 550px; color: var(--texto-secundario); margin: 0 auto; font-size: 1.1rem; line-height: 1.8;">
                     Para mí, tu presencia es el mejor regalo. Si deseas obsequiarme algo adicional, la tradición de lluvia de sobres es la manera de hacerlo. Habrá un baúl en la recepción para depositarlos.
                 </p>
             </div>
@@ -318,7 +381,7 @@
         <!-- CONFIRMACIÓN -->
         <section class="reveal">
             <h2>Confirmación</h2>
-            <p style="margin-bottom: 30px; color: var(--texto-secundario);">Por favor, confírmanos tu asistencia</p>
+            <p style="margin-bottom: 35px; color: var(--texto-secundario); font-size: 1.1rem;">Por favor, confírmanos tu asistencia</p>
             
             <input type="text" id="guestName" placeholder="Tu nombre completo">
             
@@ -336,7 +399,7 @@
         <section class="reveal">
             <div class="content-box">
                 <h2>Muro de Deseos</h2>
-                <p style="margin-bottom: 30px; color: var(--texto-secundario); max-width: 500px; margin-left: auto; margin-right: auto;">
+                <p style="margin-bottom: 35px; color: var(--texto-secundario); max-width: 500px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
                     Envíame un mensaje especial para guardarlo de recuerdo en este día tan importante.
                 </p>
                 
@@ -354,10 +417,9 @@
     </div>
 
     <script>
-        // 1. Número de WhatsApp general (Actualizado al nuevo número)
         const PHONE_NUMBER = "523221164434";
 
-        // 2. Lógica del Sobre y Autoplay de Música
+        // Lógica del Sobre 
         const envelope = document.getElementById('envelope');
         envelope.addEventListener('click', () => {
             envelope.classList.add('open-envelope');
@@ -372,6 +434,7 @@
                         main.style.opacity = '1'; 
                         reveal(); 
                         createParticles(); 
+                        createSparkles(); // Nuevo efecto de brillos
                         
                         const music = document.getElementById('bgMusic');
                         const musicBtn = document.getElementById('musicToggleBtn');
@@ -382,7 +445,7 @@
             }, 1800);
         });
 
-        // 3. Lógica para pausar/reanudar música
+        // Pausar/reanudar música
         function toggleMusic() {
             const music = document.getElementById('bgMusic');
             const icon = document.querySelector('#musicToggleBtn i');
@@ -398,7 +461,7 @@
             }
         }
 
-        // 4. RSVP vía WhatsApp
+        // RSVP WhatsApp
         function sendRSVP() {
             const name = document.getElementById('guestName').value.trim();
             const attend = document.getElementById('attendance').value;
@@ -413,7 +476,7 @@
             window.open(url, '_blank');
         }
 
-        // 5. Muro de Deseos vía WhatsApp
+        // Muro de Deseos WhatsApp
         function sendWish() {
             const name = document.getElementById('wishName').value.trim();
             const message = document.getElementById('wishMessage').value.trim();
@@ -427,12 +490,11 @@
             const url = `https://wa.me/${PHONE_NUMBER}?text=${text}`;
             window.open(url, '_blank');
             
-            // Limpiar campos
             document.getElementById('wishName').value = "";
             document.getElementById('wishMessage').value = "";
         }
 
-        // 6. Cuenta Regresiva (8 de Agosto de 2026, 17:00 hrs)
+        // Cuenta Regresiva (8 de Agosto de 2026)
         const targetDate = new Date("Aug 8, 2026 17:00:00").getTime();
         setInterval(() => {
             const now = new Date().getTime();
@@ -446,7 +508,7 @@
             }
         }, 1000);
 
-        // 7. Animaciones al hacer Scroll (Intersection Observer)
+        // Intersection Observer para revelar elementos
         function reveal() {
             const reveals = document.querySelectorAll(".reveal");
             const windowHeight = window.innerHeight;
@@ -461,16 +523,15 @@
         }
         window.addEventListener("scroll", reveal);
 
-        // 8. Partículas Elegantes (Tonos pastel, blanco, plateado y azul)
+        // Aumentados los brillos y partículas para mayor efecto visual
         function createParticles() {
             const container = document.getElementById('particles-js');
-            const colors = ['#FFFFFF', '#E6F4F1', '#AEE2FF', '#C0C0C0'];
-            for (let i = 0; i < 40; i++) {
+            const colors = ['#FFFFFF', '#E6F4F1', '#AEE2FF', '#F1F5F9'];
+            for (let i = 0; i < 60; i++) { // Se aumentaron a 60 partículas
                 let p = document.createElement('div');
                 let color = colors[Math.floor(Math.random() * colors.length)];
-                let size = Math.random() * 4 + 2;
-                
-                let shadow = `0 0 ${Math.random() * 8 + 4}px ${color}`;
+                let size = Math.random() * 5 + 2;
+                let shadow = `0 0 ${Math.random() * 12 + 5}px ${color}`;
                 
                 p.style.cssText = `
                     position: absolute; 
@@ -478,27 +539,52 @@
                     height: ${size}px; 
                     background: ${color}; 
                     border-radius: 50%; 
-                    bottom: -10px; 
+                    bottom: -15px; 
                     left: ${Math.random() * 100}vw; 
                     box-shadow: ${shadow};
-                    animation: floatUp ${Math.random() * 8 + 6}s linear infinite, twinkle ${Math.random() * 3 + 2}s ease-in-out infinite alternate;
-                    opacity: 0.6;
+                    animation: floatUp ${Math.random() * 10 + 6}s linear infinite, twinkle ${Math.random() * 3 + 2}s ease-in-out infinite alternate;
+                    opacity: 0.7;
                 `;
                 container.appendChild(p);
+            }
+        }
+
+        // Nuevo sistema de brillos mágicos en pantalla
+        function createSparkles() {
+            const container = document.getElementById('sparkles-container');
+            for (let i = 0; i < 25; i++) {
+                let sparkle = document.createElement('div');
+                let size = Math.random() * 4 + 1;
+                sparkle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: #fff;
+                    border-radius: 50%;
+                    top: ${Math.random() * 100}vh;
+                    left: ${Math.random() * 100}vw;
+                    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
+                    animation: sparkleAnim ${Math.random() * 4 + 2}s ease-in-out infinite;
+                `;
+                container.appendChild(sparkle);
             }
         }
 
         const s = document.createElement('style');
         s.innerHTML = `
             @keyframes floatUp { 
-                0% { transform: translateY(0); opacity: 0; }
-                10% { opacity: 0.7; }
-                90% { opacity: 0.7; }
-                100% { transform: translateY(-100vh); opacity: 0; } 
+                0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+                10% { opacity: 0.8; }
+                90% { opacity: 0.8; }
+                100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } 
             }
             @keyframes twinkle {
-                0% { transform: scale(1); opacity: 0.3; }
-                100% { transform: scale(1.5); opacity: 0.8; }
+                0% { transform: scale(0.8); opacity: 0.4; }
+                100% { transform: scale(1.6); opacity: 0.9; }
+            }
+            @keyframes sparkleAnim {
+                0%, 100% { transform: scale(0); opacity: 0; }
+                50% { transform: scale(1); opacity: 1; }
             }
         `;
         document.head.appendChild(s);
